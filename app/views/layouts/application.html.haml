@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Phonebookapp
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    .container
+      .row
+        .col
+          %p.notice= notice
+          %p.alert= alert
+      - if user_signed_in?
+        .row
+          .col-4
+            .row
+              Logged in as
+              = succeed "." do
+                %strong= current_user.email
+            .row
+              = link_to 'PhoneBook | ',phonebook_index_path, :class => 'navbar-link'
+              = link_to 'Contact | ', contacts_path, :class => 'navbar-link'
+              = link_to 'Edit profile | ', edit_user_registration_path, :class => 'navbar-link'
+              = link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'
+        %br
+        .row.col-9
+          =yield
+      - else
+        .col-6.col-md-4
+          = yield
+

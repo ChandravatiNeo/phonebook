@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: postgres
+
+development:
+  <<: *default
+  database: dev_phonebookapp
+
+test:
+  <<: *default
+  database: test_phonebookapp
+
+production:
+  <<: *default
+  database: prod_phonebookapp

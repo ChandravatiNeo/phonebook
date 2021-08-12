@@ -1,0 +1,18 @@
+%table.table
+  %thead
+    %tr
+      %th{scope: "col"} #
+      %th{scope: "col"} First Name
+      %th{scope: "col"} Last Name
+      %th{scope: "col"} Phone Number
+      %th{scope: "col"} Action
+  %tbody
+    - @contacts.each do |contact|
+      %tr
+        %td= contact.id
+        %td= contact.first_name.titleize
+        %td= contact.last_name.titleize
+        %td= contact.phone_number
+        %td
+          = link_to 'Edit | ', edit_contact_path(contact)
+          = link_to 'Delete', contact_path(contact), method: :delete
